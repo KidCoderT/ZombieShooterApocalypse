@@ -1,10 +1,40 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/Soldier 1/soldier1_gun.png" type="Texture" id=1]
 [ext_resource path="res://src/Player/Player.gd" type="Script" id=2]
+[ext_resource path="res://assets/bullet/muzzle Flash.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24.8855, 33.6451 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "Muzzle Flash"
+length = 0.05
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Muzzle Flash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Muzzle Flash:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.5, 1.2 ) ]
+}
 
 [node name="Player" type="KinematicBody2D" groups=[
 "Player",
@@ -20,5 +50,15 @@ texture = ExtResource( 1 )
 position = Vector2( -15.2543, 0.1091 )
 shape = SubResource( 1 )
 
+[node name="Muzzle Flash" type="Sprite" parent="."]
+visible = false
+position = Vector2( 52.6056, 14.9439 )
+rotation = -1.57079
+scale = Vector2( 0.5, 1.2 )
+texture = ExtResource( 3 )
+
+[node name="MuzzleFlashAnimation" type="AnimationPlayer" parent="."]
+"anims/Muzzle Flash" = SubResource( 2 )
+
 [node name="EndOfGun" type="Position2D" parent="."]
-position = Vector2( 41.2945, 14.1581 )
+position = Vector2( 41.2945, 14.8263 )

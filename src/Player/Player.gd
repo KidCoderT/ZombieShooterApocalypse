@@ -9,6 +9,7 @@ export (float) var fire_rate = 0.5
 var can_fire = true
 var velocity := Vector2()
 onready var end_of_gun = $EndOfGun
+onready var muzzle_flash_animation = $MuzzleFlashAnimation
 onready var bullet = preload("res://src/Player/Bullet.tscn")
 
 func _physics_process(delta):
@@ -29,6 +30,7 @@ func _physics_process(delta):
 		bullet_instance.position = end_of_gun.get_global_position()
 		bullet_instance.rotation_degrees = rotation_degrees
 		bullet_instance.apply_impulse(Vector2(), Vector2(bullet_speed, 0).rotated(rotation))
+		muzzle_flash_animation.play("Muzzle Flash")
 		get_tree().get_root().add_child(bullet_instance)
 		can_fire = false
 		yield(get_tree().create_timer(fire_rate), "timeout")
